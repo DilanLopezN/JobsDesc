@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CentralDeExames.css">
+    <title>Exames Veterinarios</title>
+</head>
+<body>
+    <main>
+        <%@LANGUAGE = VBScript %><!--#include file="banco5.asp"-->
+<%
+
+email = Request.querystring("emailTxt")
+xcpf = Request.querystring("xCpf")
+
+if email <> "" then
+   x = 1
+   do until x = (len(email) + 1)
+      letra = mid(email,1,x)
+      if letra = "'" then ops = 1
+      if letra = "/" then ops = 1
+      if letra = "*" then ops = 1
+      if letra = ";" then ops = 1
+      if letra = "." then ops = 1
+      if letra = "," then ops = 1
+      if letra = "=" then ops = 1
+      if letra = "?" then ops = 1
+      if letra = "%" then ops = 1
+      if letra = "&" then ops = 1
+      if letra = "@" then ops = 1
+      if letra = "!" then ops = 1
+      if letra = "+" then ops = 1
+      if letra = "-" then ops = 1
+      if letra = "#" then ops = 1
+      if letra = "$" then ops = 1
+      x = x + 1
+   loop
+end if
+
+if xcpf <> "" then
+   x = 1
+   do until x = (len(xcpf) + 1 )
+      letra = mid(xcpf,1,x)
+      if letra = "'" then ops = 1
+      if letra = "/" then ops = 1
+      if letra = "*" then ops = 1
+      if letra = ";" then ops = 1
+      if letra = "," then ops = 1
+      if letra = "=" then ops = 1
+      if letra = "?" then ops = 1
+      if letra = "%" then ops = 1
+      if letra = "&" then ops = 1
+      if letra = "@" then ops = 1
+      if letra = "!" then ops = 1
+      if letra = "+" then ops = 1
+      if letra = "-" then ops = 1
+      if letra = "#" then ops = 1
+      if letra = "$" then ops = 1
+      x = x + 1
+   loop
+end if
+
+if email <> "" and xcpf <> "" then
+   best = 1
+   xcpf = Cstr(xcfp)
+   strq = "Select * from clientes where email = '" & email & "'  and cgc like '" & xcpf & "%'"
+   set RstCli = ObjConn.execute(strq)
+   cabum = strq
+
+   if RstCli.eof = false then
+      session("idCl") = RstCli("CodCli")
+      response.redirect "AnimalInterface.asp?cc=" & RstCli("CodCli")
+   else
+      wrong = 1
+   end if
+   RstCli.close
+   set RstCli = nothing
+end if
+
+response.write "<div class="Layout"  border=0 width=800 class=style9>"
+response.write "<header ><img src="logoPadronizada.png"></img></header>"
+response.write "<div class="HeaderContainer"><p>Baeta Neves - (11) 4336-7185 São Bernardo do Campo - SP - Rua Thales dos Santos Freire,136 Vila Baeta Neves. 24 horas</p>"                                                                                                                             m, Neves - (11) 4336-7185 S�o Bernardo do Campo - SP - Rua Thales dos Santos Freire,136 Vila Baeta Neves. 24 horas</p>"
+response.write "<p>Campestre - (11) 4428-1222 Santo André - SP - Av. Dom Pedro II,3.309 Bairro Campestre. 24 horas</p>"
+response.write "<p>Vila Alto de Sto André - (11) 4200-1160 Santo André - SP - Av. Martim Francisco,802 Vila Alto de Santo André.</p></div>"
+
+response.write "<form action=centraldeexames.asp method=Get>"
+response.write " <div class="infoContent"><strong>Resultado dos exames:  </strong>  <span>Preencha os dados de acordo com o infomado no Hospital</span>"
+if wrong = 1 then response.write "<tr><td colspan=2 div align=center><br><font color=#FF0000>Combinação de e-mail / CPF inválidos</td></tr>"
+
+response.write "<div class="loginContent"><label for="emailTxt">Seu e-mail:</label><div class="inputContainer"><img src="EnvelopeSimple.png" alt=""><input  type=text name=emailTxt value='" & email & "'  placeholder="Seu e-mail"></div>"
+response.write "<label for="xCpf">Seu CPF:</label><div class="inputContainer"><img src="UserRectangle.png" alt=""><input name=xCpf size=20 class=style9 type=text onKeyUp=m_CPF(); value='" & xcpf & "'  placeholder="Seu cpf"></div>"
+response.write "<tr><td colspan=2 height=3 bgcolor=#f9f9f9 div align=left></td></tr>"
+response.write "<button  type=submit name=submit >Entrar</button>"
+response.write "</form><tr><td height=18 background=../graphics/BkgGray.jpg colspan=2 div align=right></td></tr>"
+response.write "</form><tr><td colspan=2 height=40 bgcolor=#f9f9f9></td></tr>"
+response.write "</div > </div> "
+
+ObjConn.close
+set RstCliente = nothing
+Set ObjConn = nothing
+Set SConnString = nothing
+Set Strq = nothing
+%>
+    </main>
+</body>
+<!-- 
+<footer  id="footerContent" class="footerContent">
+        <h3>Copyright - 2023 Dr.Hato  todos os direitos reservados ©</h3>
+        <div class="socialLinks">
+           <img src="insta.png" alt="instagram">
+           <img src="facebook.png" alt="facebook">
+           <img src="whatsapp.png" alt="whatsapp">
+        </div>
+</footer>
+-->
+</html>
