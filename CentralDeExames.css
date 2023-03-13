@@ -20,11 +20,15 @@
     input:focus {
         outline: none;
     }
+
+    header {
+        order: 1;
+    }
  
     
 .Layout {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
 }
 
