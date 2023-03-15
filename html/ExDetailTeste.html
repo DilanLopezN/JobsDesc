@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="../css/DetalhesExames.css">
+   <title>Detalhes - Exames</title>
+</head>
+<body>
+   <style TYPE ="text/css">
+      A{text-decoration:none;font:Verdana;}
+      p{font-family:Arial;color:#000000;font-size:100%;}
+      .style9{font-size:9px;font-family:Verdana;color=#000000;}
+      #LayerTopo{position:absolute;width:798px;height:300px;z-index:1;Left:0;top:0px}
+      #Layer1{position:absolute;width:798px;height:300px;z-index:1;Left:10;top:65px;overflow=scroll}
+      #LayerBarraDeBaixo{position:absolute;width:700px;height:20px;z-index:1;Left:8;top:382px}
+      #LayerBarraDeCima{position:absolute;width:700px;height:20px;z-index:1;Left:8;top:80px}
+      #LayerBtnBack{position:absolute;width:300px;height:20px;z-index:10;Left:680;top:80px}
+      #LayerTxtBack{position:absolute;width:200px;height:20px;z-index:10;Left:600;top:81px}
+      </style>
+      <%
+      
+      origem = Trim(Request.QueryString("origem"))
+      id = Trim(Request.QueryString("id"))
+      
+      Set Objconn=Server.CreateObject("ADODB.Connection")
+      Objconn.mode = 3
+      sConnString = "DRIVER={Microsoft Access Driver (*.mdb)};" & _ 
+      "DBQ=" & Server.MapPath("\vet\vet.mdb") & ";"
+      ObjConn.open (sconnstring), "", "M63b07C42nava"
+      
+      strq = "Select * from CadAnimais where CodAnimal=" & id
+      set RstCadastro = objconn.execute(strq)
+      
+      If Session("IdCl") <> "" then
+         If RstCadastro("CodCli") <> Session("IdCl") then
+            response.redirect("Centraldeexames.asp")
+         end if
+      end if
+      
+      strq = "Select * from ExamesPorConsulta where CodAnimal=" & Id & " and ok=" & -1 & " order by data desc"
+      set RstExames = objconn.execute(strq)0
+      
+      if RstExames.eof = false then
+      
+         session("IdCl") = RstExames("CodCli")
+      
+         response.write "<header class="headerContainer">"
+         response.write " <img src="../assets/logoPadronizada.png">"
+         response.write "<a class="backArrowContainer" href=AnimalInterfaceTeste.asp?id="&id&"&origem="&origem&"&CC="&RstCadastro("codcli")&"><img src="../assets/ArrowCircleLeft.png"> <h3>Voltar para lista</h3></a>"
+         response.write "</header>"
+      
+         response.write "<div id=layer1><table width=780 class=style9 border=0>"
+         response.write " <h2>Resultado dos exames veterinários</h2> "
+         response.write "<div class="petSelect"><p>Pet selecionado : "& RstCadastro("NomeAnimal") &"</p></div>"
+         iF RstExames.eof = false then
+            response.write "<div class="selectExame"><p>Selecione um exame :</p></div>"
+            Do Until RstExames.eof = true
+               if bgcolor="f7f7f7" then bgcolor="ffffff" else bgcolor="f7f7f7"
+               Databr   = RIGHT("0" & day(RstExames("data")),2) & "/" & RIGHT("0" & month(RstExames("data")),2) & "/" & RIGHT("0" & year(RstExames("data")),2)
+               response.write "<div><img src="../assets/Flask.png" border=0><h2>test</h2></img><a href=PrintExamNewONLINE.asp?CodCli=" & RstCadastro("codcli") & "&text=|"& RstExames("CodExameConsulta") &"| target=_self>
+                  <font color=#000000> "& DataBr & " - " & RstExames("Nomexame") &"</a></div>"
+            RstExames.movenext
+            loop
+         end if
+         response.write "</table></div>"
+      '   response.write "<tr><td height=18 background=../graphics/BkgGray.jpg colspan=2 div align=right></td></tr>"
+      '   response.write "<tr><td height=50 colspan=2 bgcolor=#f9f9f9></td></tr>"
+      '   response.write "</table>"
+         RstExames.close
+         Set RstExames = nothing
+      '   response.write "<table border=0 width=800 class=style9>"
+      else
+         str ="AnimalInterfaceTeste.asp?msg=<div class=warningMsg ><img src=../scr/images/Warning.png><h2>Não existem exames concluídos para o pet selecionado.</h2></div>&CC=" & Session("IdCl")
+         rstcadastro.close
+         Set RstCadastro = nothing
+         ObjConn.close
+         Set ObjConn=nothing
+         set id = nothing
+         Set Origem=nothing
+         set strq = nothing
+         response.Redirect str
+      end if
+      
+      Rstcadastro.close
+      Set Rstcadastro = nothing
+      response.write "<Tr><td colspan=2 bgcolor=#f9f9f9 height=50><hr></td></tr>"
+      response.write "</table></div>"
+      
+      
+      
+      ObjConn.close
+      set RstCliente = nothing
+      Set ObjConn = nothing
+      Set SConnString = nothing
+      Set Strq = nothing
+      %>
+   
+</body>
+</html>
+
+

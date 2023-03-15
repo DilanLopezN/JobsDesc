@@ -1,0 +1,106 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
+input:focus {
+    outline: none;
+  }
+
+
+.Container  {
+    display: flex;
+    height: 100vh;
+    color: white;
+    font-weight: bold;
+}
+
+
+.section-1 img {
+    height: 100vh;
+    width: 40vw;
+}
+.section-2 {
+     width: 60vw;
+ 
+      background-color: #96c818
+  
+  }
+  
+  .section-2 {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      
+  }
+
+.section-3  img{
+    width: 100%;
+    
+}
+
+
+.formAlign {
+    margin-top: 2rem;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.inputContainer input{
+    width: 300px;
+    height: 2rem;
+    color: white;
+
+    font-size: 18px;
+    font-weight: bold;
+    gap: 1rem;
+
+    background: transparent;
+    text-align: center;
+    border: none;
+    border-bottom: 3px solid #86b71f;
+}
+
+.inputContainer, label {
+    font-weight: bold;
+    font-size: medium;
+    color: rgb(189, 179, 179);
+    padding-right: 1rem;
+    text-shadow: 0 0 5px black;
+  
+}
+
+ .Container button {
+    width: 80%;
+    margin-top: 2rem;
+    height: 2rem;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+  
+    border: none;
+    background-color: gray;
+    text-shadow: 0 0 5px black;
+    border-radius: 12px;
+    transition: all 0.2s;
+  }
+ button:hover {
+    filter: brightness(0.9);
+  }
+
+.titleContent h1 {
+    font-weight: bold;
+    font-size: 28px;
+}
+.titleContent strong {
+    font-size: 18px;
+    color: grey;
+    font-weight: 500;
+}

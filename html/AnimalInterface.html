@@ -1,0 +1,81 @@
+<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+<style TYPE ="text/css">
+A{text-decoration:none;font:Verdana;}
+p{font-family:Arial;color:#000000;font-size:100%;}
+.style9{font-size:9px;font-family:Verdana;color=#000000;}
+#Layer1{position:absolute;width:700px;height:300px;z-index:1;Left:10;top:65px;overflow=scroll}
+#LayerBarraDeBaixo{position:absolute;width:700px;height:20px;z-index:1;Left:8;top:382px}
+#LayerBarraDeCima{position:absolute;width:700px;height:20px;z-index:1;Left:8;top:80px}
+</style><html><head><title>Sistema Veterin�rio - Central de Exames</title><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<%
+
+CodCli = Trim(Request.QueryString("CC"))
+msg = Trim(Request.QueryString("msg"))
+
+
+Set Objconn=Server.CreateObject("ADODB.Connection")
+Objconn.mode = 3
+sConnString = "DRIVER={Microsoft Access Driver (*.mdb)};" & _ 
+"DBQ=" & Server.MapPath("\vet\vet.mdb") & ";"
+ObjConn.open (sconnstring), "", "M63b07C42nava"
+
+strq = "Select * from clientes where CodCli=" & CodCli
+set RstCadastro = objconn.execute(strq)
+
+strq = "Select * from CadAnimais where CodCli=" & CodCli
+set RstAni = objconn.execute(strq)
+
+            if Rstcadastro("CodCli") <> session("idCl") then
+               RstCadastro.close
+               Set RstCadastro=nothing
+               RstAni.close
+               Set RstAni = nothing
+               set CodCli = nothing
+               set carater = nothing
+               ObjConn.close
+               Set ObjConn = nothing
+               response.Redirect("centraldeexames.asp")
+            end if
+
+response.write "<table border=0 width=500 class=style9>"
+response.write "<tr><td width=150 colspan=2 div align=center><img src=../scr/images/LogoNovo.jpg border=0></img></td></tr></table></div>"
+response.write "<div id=layer1><table width=804 class=style9 border=0 bgcolor=#f7f7f7>"
+response.write "<tr><td colspan=2><hr><B>Resultados de exames veterin�rios.</b></td></tr>"
+if Msg<>"" then
+   response.write "<tr><td colspan=2><hr><B>"& msg &"</td></tr>"
+end if
+iF RstAni.eof = false then
+   response.write "<tr><td height=16 bgcolor=#ccccFF colspan=2 div align=Left><B>Selecione :</td></tr>"
+   Do Until RstAni.eof = true
+      if bgcolor="f7f7f7" then bgcolor="ffffff" else bgcolor="f7f7f7"
+      response.write "<tr><td width=300 bgcolor=#"& bgcolor &" colspan=2 div align=Left><a href=ExDetail.asp?id="& RstAni("CodAnimal") & ">" & RstAni("NomeAnimal") &"</a></td></tr>"
+'<img src=../scr/images/lilstar.png border=0></img>
+   RstAni.movenext
+   loop
+end if
+response.write "</table></div>"
+response.write "<tr><td height=18 background=../graphics/BkgGray.jpg colspan=2 div align=right></td></tr>"
+response.write "</table>"
+
+response.write "<div id=LayerBarraDeBaixo>"
+response.write "<table border=0 width=704 class=style9>"
+response.write "<Tr><td height=18 background=../graphics/BkgGray.jpg></td></tr>"
+response.write "</table></div>"
+
+response.write "<div id=LayerBarraDeCima>"
+response.write "<table border=0 width=704 class=style9>"
+response.write "<Tr><td height=18 background=../graphics/BkgGray.jpg></td></tr>"
+response.write "</table></div>"
+
+RstAni.close
+Set RstAni = nothing
+
+RstCadastro.close
+Set RstCadastro = nothing
+
+ObjConn.close
+set RstCliente = nothing
+Set ObjConn = nothing
+Set SConnString = nothing
+Set Strq = nothing
+%>
