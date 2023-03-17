@@ -1,0 +1,299 @@
+* {
+  background-color: white;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
+
+main {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  height: 100vh;
+}
+
+header img {
+  background: transparent;
+}
+
+input:focus {
+  outline: none;
+}
+
+header {
+  order: 1;
+}
+
+.Layout {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.HeaderContainer {
+  margin-top: 4rem;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.adressContainerBaeta {
+  position: relative;
+  text-align: center;
+  transition: all 0.8s;
+}
+
+.adressContainerBaeta img {
+  display: block;
+  margin: 0 auto;
+}
+
+.adressContainerBaeta h3 {
+  display: flex;
+  align-items: flex-end;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  font-size: 1.25rem;
+  text-shadow: 0 0 15px black;
+  line-height: 1.2;
+  background: transparent;
+  color: white;
+  transition: all 0.8s;
+}
+
+.adressContainerBaeta h3:hover {
+  font-size: 1.35rem;
+  top: 60%;
+}
+
+.adressContainerBaeta a {
+  color: #86b71f;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 0 0 1px black;
+
+  text-decoration: underline;
+}
+
+.infoContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 2rem;
+
+  width: 33.75rem;
+  height: 33.85rem;
+  border: 1px solid rgb(203, 191, 191);
+  border-radius: 8px;
+}
+
+.infoContent h4 {
+  color: red;
+  font-weight: bold;
+}
+.loginContent {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  color: black;
+  gap: 0.5rem;
+}
+
+.loginContent input {
+  width: 20rem;
+  height: 2rem;
+  padding: 1rem;
+
+  text-align: center;
+  border: none;
+  border-bottom: 3px solid #86b71f;
+}
+
+.loginContent button {
+  width: 20rem;
+  height: 2rem;
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+
+  border: none;
+  background-color: #c2e082;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.loginContent button:hover {
+  filter: brightness(0.9);
+}
+
+.inputContainer {
+  position: relative;
+}
+.inputContainer img {
+  position: absolute;
+  background: transparent;
+}
+
+#footerContent {
+  height: 5.25rem;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+
+  color: black;
+}
+
+#footerContent,
+h3,
+img,
+.socialLinks {
+  background-color: #c2e082;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+@media only screen and (max-width: 440px) {
+  .Layout {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+  }
+
+  header {
+    order: 1;
+  }
+  main {
+    height: 100%;
+    align-items: center;
+
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+  }
+
+  .HeaderContainer {
+    margin-top: 4rem;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .adressContainerBaeta {
+    position: relative;
+    text-align: center;
+    transition: all 0.8s;
+  }
+
+  .adressContainerBaeta img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .adressContainerBaeta h3 {
+    display: flex;
+    align-items: flex-end;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+    font-size: 1.25rem;
+    text-shadow: 0 0 15px black;
+    line-height: 1.2;
+    background: transparent;
+    color: white;
+    transition: all 0.8s;
+  }
+
+  .adressContainerBaeta h3:hover {
+    font-size: 1.35rem;
+    top: 60%;
+  }
+
+  .adressContainerBaeta a {
+    color: #86b71f;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 0 0 1px black;
+
+    text-decoration: underline;
+  }
+
+  .infoContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 2rem;
+
+    width: 100%;
+    height: 100vh;
+  }
+
+  .infoContent h4 {
+    color: red;
+    font-weight: bold;
+  }
+
+  .loginContent {
+    display: flex;
+
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+
+    color: black;
+    gap: 0.5rem;
+  }
+
+  .loginContent input {
+    width: 100%;
+    height: 2rem;
+    padding: 1rem;
+
+    text-align: center;
+    border: none;
+    border-bottom: 3px solid #86b71f;
+  }
+
+  .loginContent button {
+    width: 80%;
+    height: 2rem;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+
+    border: none;
+    background-color: #c2e082;
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+
+  .loginContent button:hover {
+    filter: brightness(0.9);
+  }
+
+  .inputContainer {
+    position: relative;
+  }
+  .inputContainer img {
+    position: absolute;
+    background: transparent;
+  }
+}
