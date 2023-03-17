@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
    <meta charset="UTF-8">
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,7 +46,7 @@ response.write "<div class=Container>"
 response.write "<div class=section-1><img src=../scr/images/Dogfundo.png></div>"
 iF RstAni.eof = false then
    response.write "<div class=section-2>"
-   response.write "<h1>Seleção de pets</h1>"
+   response.write "<h1>Selecao de pets</h1>"
    response.write "<div class=form><p>Selecione seu pet para ver os exames</p>"
    Do Until RstAni.eof = true
    response.write "<div class=petSelect><a href=ExDetailProd.asp?id="& RstAni("CodAnimal") & ">" & RstAni("NomeAnimal") &"</a><img src=../scr/images/ArrowRight.png></div>"

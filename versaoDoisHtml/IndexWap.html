@@ -1,0 +1,140 @@
+<style TYPE ="text/css">
+A{text-decoration: none;font:Verdana;p{font-family: Arial, sans-serif; color: #000000; font-size: 100%;}}
+.style9 {font-size: 10px; font-weight: bold; font-family: Verdana; color=#000099; }
+</style>
+<% @LANGUAGE = VBScript %>
+<%'Option Explicit
+Dim Logn, Passw, idcliente
+Dim userhome
+SESSION.TIMEOUT = 999
+
+IF Request("TxtLogin") <> "" then
+   Dim ObjConn, ObjRS, strQ, sConnString , bvalid,coduser
+   dim LLtme,LLdate,Destiny
+Set Objconn=Server.CreateObject("ADODB.Connection")
+Objconn.mode = 3
+sConnString = "DRIVER={Microsoft Access Driver (*.mdb)};" & _ 
+"DBQ=" & Server.MapPath("\vet\vet.mdb") & ";"
+ObjConn.open (sconnstring), "", "M63b07C42nava"
+   'Retrieving Form Data from QueryString
+   Logn=Request("TxtLogin")
+   passw=Request("TxtSenha")
+   destiny = trim(Request.QueryString("Destiny"))
+   Dim Letra,x ,Loginlenght
+   loginlenght = len(Logn)
+   x=1
+   Do until x = loginLenght + 1
+      Letra = Mid(Logn,x,1)
+      if letra = "'" then response.redirect "indexwap.asp"
+      if letra = "/" then response.redirect "indexwap.asp"
+      if letra = "*" then response.redirect "indexwap.asp"
+      if letra = "'" then response.redirect "indexwap.asp"
+      if letra = ";" then response.redirect "indexwap.asp"
+      if letra = "=" then response.redirect "indexwap.asp"
+      if letra = "&" then response.redirect "indexwap.asp"
+      if letra = "#" then response.redirect "indexwap.asp"
+      if letra = "!" then response.redirect "indexwap.asp"
+      if letra = "@" then response.redirect "indexwap.asp"
+      if letra = "$" then response.redirect "indexwap.asp"
+      if letra = "%" then response.redirect "indexwap.asp"
+      if letra = "(" then response.redirect "indexwap.asp"
+      if letra = ")" then response.redirect "indexwap.asp"
+      if letra =":"  then response.redirect "indexwap.asp"
+      if letra = "?" then response.redirect "indexwap.asp"
+      if letra = "~" then response.redirect "indexwap.asp"
+      if letra = "^" then response.redirect "indexwap.asp"
+      if letra = "[" then response.redirect "indexwap.asp"
+      if letra = "]" then response.redirect "indexwap.asp"
+      if letra = "´" then response.redirect "indexwap.asp"
+      if letra = "`" then response.redirect "indexwap.asp"
+      if letra = "{" then response.redirect "indexwap.asp"
+      if letra = "}" then response.redirect "indexwap.asp"
+      if letra = "|" then response.redirect "indexwap.asp"
+      if letra = "\" then response.redirect "indexwap.asp"
+      if letra = "¨" then response.redirect "indexwap.asp"
+      x = x + 1
+   loop
+   x = 1
+   loginlenght = len(passw)
+   x=1
+   Do until x = loginLenght + 1
+      Letra = Mid(passw,x,1)
+      if letra = "'" then response.redirect "indexwap.asp"
+      if letra = "/" then response.redirect "indexwap.asp"
+      if letra = "*" then response.redirect "indexwap.asp"
+      if letra = "'" then response.redirect "indexwap.asp"
+      if letra = ";" then response.redirect "indexwap.asp"
+      if letra = "=" then response.redirect "indexwap.asp"
+      if letra = "&" then response.redirect "indexwap.asp"
+      if letra = "#" then response.redirect "indexwap.asp"
+      if letra = "!" then response.redirect "indexwap.asp"
+      if letra = "@" then response.redirect "indexwap.asp"
+      if letra = "$" then response.redirect "indexwap.asp"
+      if letra = "%" then response.redirect "indexwap.asp"
+      if letra = "(" then response.redirect "indexwap.asp"
+      if letra = ")" then response.redirect "indexwap.asp"
+      if letra =":"  then response.redirect "indexwap.asp"
+      if letra = "?" then response.redirect "indexwap.asp"
+      if letra = "~" then response.redirect "indexwap.asp"
+      if letra = "^" then response.redirect "indexwap.asp"
+      if letra = "[" then response.redirect "indexwap.asp"
+      if letra = "]" then response.redirect "indexwap.asp"
+      if letra = "´" then response.redirect "indexwap.asp"
+      if letra = "`" then response.redirect "indexwap.asp"
+      if letra = "{" then response.redirect "indexwap.asp"
+      if letra = "}" then response.redirect "indexwap.asp"
+      if letra = "|" then response.redirect "indexwap.asp"
+      if letra = "\" then response.redirect "indexwap.asp"
+      if letra = "¨" then response.redirect "indexwap.asp"
+      x = x + 1
+   loop
+   strQ = "SELECT * FROM Users WHERE Nome = '" & Logn & "' and senha = '" & passw & "'"
+   set ObjRs=ObjConn.Execute(strQ)
+   if ObjRS.eof= true then
+      Objrs.close
+      set ObjRs = nothing
+      Objconn.close
+      Set ObjConn = nothing
+      Response.Redirect("indexwap.asp")
+   else
+      session("idd")=ObjRs("usercode")
+      if objRs("Senhas") = -1 then
+         Session("Admin") = "1"
+      end if
+      if objRs("AdminEstoque") = -1 then
+         Session("AdminEstoque") = "1"
+      end if
+      LLtme = objrs("LT")
+      LLDate = objrs("LD")
+      If LLTme = "" then LLTme = "N/A"
+      If LLdate = "" then LLDate = "N/A"
+      Strq = "Update Users set LLD='" & LLDate & "',LLT='" & LLtme & "', LD='" & Date & "',LT='" & time & "' Where Usercode = " & objrs("UserCode")
+      Objconn.execute(strq)
+      Objrs.close
+      Set ObjRs = nothing
+      Objconn.close
+      Set ObjConn = nothing
+      response.redirect "WapMenu.asp"
+   end if
+else
+%>
+<HTML><head><title>Sistema Veterinário</title><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></head>
+<BODY bgcolor="#FFFFFF" text="#000000" link="#330099" vlink="#330099" alink="#330099">
+<p><FORM ACTION="<%= Request.ServerVariables("SCRIPT_NAME")%>" METHOD="post"><p>&nbsp;</p><p>&nbsp; </p>
+<%
+response.write "<div id=Layer2 style=position:absolute;width:240;height:320;z-index:1;left:0;top:0>"
+Response.write "<table width=240>"
+response.write "<tr><td height=18 background=images/bkgGreen.jpg><img src=images/VetWapLogo.jpg></img></td></tr>"
+response.write "<tr><td height=18 background=images/bkgBlue.jpg><Font Face=Verdana size=1><b>Insira suas credenciais</td></tr>"
+response.write "<tr><td bgcolor=#cccccc><Font Face=Verdana size=1><b>Usuário</td>"
+response.write "<tr><td bgcolor=#cccccc><Input class=style9 name=TxtLogin></input></td></tr>"
+response.write "<tr><td bgcolor=#cccccc><Font Face=Verdana size=1><b>Senha</td>"
+response.write "<tr><td bgcolor=#cccccc><Input class=style9 name=TxtSenha></input></td></tr>"
+response.write "<tr><td div align=right height=18 background=images/bkgGray.jpg><input type=Submit name=Submit class=style9 value=Entrar></td></tr>"
+response.write "<tr><td height=18 background=images/bkgGreen.jpg></td></tr>"
+Response.write "</table>"
+response.write "</div>"
+%>
+</FORM></BODY></HTML>
+<%End If %>
+

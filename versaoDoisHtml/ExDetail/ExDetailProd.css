@@ -89,10 +89,13 @@ p {
   gap: 1rem;
   text-decoration: none;
   color: gray;
-  
 }
 
-.warning h2 {
-  color: red;
+.backResult a {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  text-decoration: none;
+  gap: 1rem;
+  font-weight: bold;
 }
- 
